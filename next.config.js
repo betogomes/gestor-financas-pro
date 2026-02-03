@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removido output: 'export' para permitir rotas dinâmicas
   images: {
     unoptimized: true,
   },
-  distDir: 'out',
 }
 
 module.exports = nextConfig
