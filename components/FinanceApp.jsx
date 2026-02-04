@@ -231,19 +231,25 @@ const FinanceApp = () => {
     window.print();
   };
 
-  // Generate sharing link (placeholder - will be implemented with backend)
-  const generateShareLink = () => {
-    const shareData = {
-      month: selectedMonth,
-      year: selectedYear,
-      expenses: getFilteredExpenses()
-    };
-    const encoded = btoa(JSON.stringify(shareData));
-    const link = `${window.location.origin}/share/${encoded}`;
-    
-    navigator.clipboard.writeText(link);
-    alert('Link de compartilhamento copiado! (Modo leitura)\n\nNota: Esta é uma versão local. Para funcionar online, configure o Supabase.');
+// Gerar link de compartilhamento (simplificado - salva JSON localmente)
+const generateShareLink = () => {
+  const shareData = {
+    month: selectedMonth,
+    year: selectedYear,
+    expenses: getFilteredExpenses()
   };
+  
+  // Criar arquivo JSON para compartilhar
+  const dataStr = JSON.stringify(shareData, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `compartilhar-${months[selectedMonth]}-${selectedYear}.json`;
+  link.click();
+  
+  alert('Arquivo JSON baixado! Envie este arquivo para quem você deseja compartilhar.');
+};
 
   const calendarDays = generateCalendar();
   const filteredExpenses = getFilteredExpenses();
@@ -655,13 +661,7 @@ const FinanceApp = () => {
               />
             </label>
 
-            <button
-              onClick={generateShareLink}
-              className="p-4 bg-pink-500 text-white rounded-lg font-semibold hover:bg-pink-600 transition-colors flex items-center justify-center gap-2"
-            >
-              <Share2 size={20} />
-              Compartilhar
-            </button>
+<!-- o botão estava aqui -->
           </div>
 
           <div className="mt-4 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
