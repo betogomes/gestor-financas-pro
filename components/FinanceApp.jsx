@@ -661,7 +661,7 @@ const generateShareLink = () => {
               />
             </label>
 
-<!-- o botão estava aqui -->
+
           </div>
 
           <div className="mt-4 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
