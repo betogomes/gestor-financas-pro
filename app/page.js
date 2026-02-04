@@ -4,12 +4,6 @@ import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Eye, Calendar } from 'lucide-react'
 
-// ADICIONADO: generateStaticParams para export estático
-export function generateStaticParams() {
-  // Retorna array vazio - a página será gerada dinamicamente no client
-  return []
-}
-
 export default function SharedView() {
   const params = useParams()
   const [data, setData] = useState(null)
